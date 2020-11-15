@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="Layout/Layout :: head"></head>
+
+<body>
+	<header th:replace="Layout/Layout :: header"></header>
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			<div><a class="btn btn-danger btn-xs mx-2" th:href="@{'/ver/' + ${usuario.id}(format=pdf)}"
+			 >PDF</a>
+			 <a class="btn btn-success btn-xs" th:href="@{'/ver/' + ${usuario.id}(format=xlsx)}"
+			 >EXCEL</a>
+			 </div>
+			
+				<img th:if="${#strings.length(usuario.foto) > 0 }"
+					class="img-thumbnail rounded float-left" style="max-width: 25%;"
+					th:alt="${usuario.foto}" th:src="@{'/uploads/' + ${usuario.foto}}" />
+
+				<ul class="list-group">
+					<li class="list-group-item" th:text="${usuario.nombre}"></li>
+					<li class="list-group-item" th:text="${usuario.apellido}"></li>
+					<li class="list-group-item" th:text="${usuario.mail}"></li>
+					<li class="list-group-item" th:text="${usuario.fechaAlta}"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="Layout/Layout :: footer"></footer>
+</body>
+</html>

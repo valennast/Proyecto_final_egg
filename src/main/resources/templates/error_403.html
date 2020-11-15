@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="Layout/Layout :: head"></head>
+
+<body>
+	<header th:replace="Layout/Layout :: header"></header>
+	<div class="container py-4">
+		<div class="card bg-danger text-white">
+			<div class="card_header">Error de Acceso Denegado!</div>
+			<div class="card-body">
+				<h5 class="card-tittle">
+					Lo Sentimos <span th:text="${#authentication.name}"></span>,
+					No tiene permisos para acceder a esos recursos.
+				</h5>
+				<a th:href="@{/listar}" class="btn btn-outline-light" role="button">Ir
+					al inicio</a>
+			</div>
+		</div>
+
+
+
+
+	</div>
+
+	<footer th:replace="Layout/Layout :: footer"></footer>
+</body>
+</html>

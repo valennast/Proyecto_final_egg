@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="Layout/Layout :: head"></head>
+<body>
+	<header th:replace="Layout/Layout :: header"></header>
+	
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				
+				<h4 class="card-title">
+					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form}" class="btn btn-primary btn-xs">Crear
+						Cliente</a>
+				</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th sec:authorize="hasRole('ROLE_USER')">id</th>
+							<th>nombre</th>
+							<th>apellido</th>
+							<th>mail</th>
+							<th>fecha</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario:${usuarios}">
+							<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-primary btn-xs" th:href="@{/ver/} + ${usuario.id}" th:text="${usuario.id}"></a></td>
+							<td th:text="${usuario.nombre}"></td>
+							<td th:text="${usuario.apellido}"></td>
+							<td th:text="${usuario.mail}"></td>
+							<td th:text="${usuario.fechaAlta}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs "
+								th:href="@{/form/} + ${usuario.id}" th:text="'Editar'"></a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs "
+								th:href="@{/eliminar/} + ${usuario.id}" th:text="'Borrar'"></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="Layout/Layout :: footer"></footer>
+
+</body>
+</html>
